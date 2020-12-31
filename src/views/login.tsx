@@ -1,22 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 const Login = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Login</Text>
+    <View
+      style={styles.background}
+    >
+      <View style={styles.logo}>
+        <Image style={styles.image} source={require('../../assets/reading.png')} />
+      </View>
+      <View style={styles.login}>
+
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  background: {
+    flex: 1
   },
-  text: {
-    color: 'red'
+  logo: {
+    flex: 0.7
+  },
+  image: {
+    height: '100%',
+    width: '100%',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+  },
+  login: {
+    flex: 1,
   }
 });
 
