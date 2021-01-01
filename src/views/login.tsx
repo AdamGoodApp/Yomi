@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <ImageBackground style={styles.image} source={require('../../assets/login-background.jpg')}>
       <View style={styles.form}>
-        <Text style={{color: '#fff', fontSize: 36}}>Login</Text>
+        <Text style={{color: '#fff', fontSize: 36, fontFamily: 'SFProDisplayBold'}}>Login</Text>
 
         <TextInput 
           style={{...styles.input, marginBottom: 30, marginTop: 40}} 
@@ -43,7 +43,7 @@ const Login = () => {
           <TouchableOpacity
             onPress={() => alert('Hello, world!')}
             style={styles.login}>
-            <Text style={{ fontSize: 18, color: '#fff' }}>Login</Text>
+            <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 9,
     color: '#fff',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'SFProTextRegular'
   },
   loginContainer: {
     alignItems: 'flex-end'
