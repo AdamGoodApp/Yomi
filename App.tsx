@@ -12,7 +12,7 @@ const App = () => {
       end={[0, 1]}
       style={styles.container}
     >
-      <StatusBar style="light" />
+      <StatusBar style="auto" />
       <Login />
     </LinearGradient>
   );

@@ -1,36 +1,91 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Text, TextInput} from 'react-native';
 
 const Login = () => {
-  return (
-    <View
-      style={styles.background}
-    >
-      <View style={styles.logo}>
-        <Image style={styles.image} source={require('../../assets/reading.png')} />
-      </View>
-      <View style={styles.login}>
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  return (
+    <ImageBackground style={styles.image} source={require('../../assets/login-background.jpg')}>
+      <View style={styles.form}>
+        <Text style={{color: '#fff', fontSize: 36}}>Login</Text>
+
+        <TextInput 
+          style={{...styles.input, marginBottom: 30, marginTop: 40}} 
+          onChangeText={(text: string) => setEmail(text)}
+          value={email}
+          placeholder='Email'
+          placeholderTextColor='rgba(255, 255, 255, 0.6)'
+          autoCapitalize='none'
+          autoCompleteType='email'
+          caretHidden={false}
+          clearButtonMode='while-editing'
+          keyboardAppearance='dark'
+          keyboardType='email-address'
+          textContentType='emailAddress'
+        />
+        <TextInput 
+          style={{...styles.input, marginBottom: 30}} 
+          onChangeText={(text: string) => setPassword(text)}
+          value={password}
+          placeholder='Password'
+          placeholderTextColor='rgba(255, 255, 255, 0.6)'
+          autoCapitalize='none'
+          autoCompleteType='password'
+          caretHidden={false}
+          clearButtonMode='while-editing'
+          keyboardAppearance='dark'
+          secureTextEntry={true}
+          textContentType='password'
+        />
+
+        <View style={styles.loginContainer}>
+          <TouchableOpacity
+            onPress={() => alert('Hello, world!')}
+            style={styles.login}>
+            <Text style={{ fontSize: 18, color: '#fff' }}>Login</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1
-  },
-  logo: {
-    flex: 0.7
-  },
   image: {
-    height: '100%',
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  form: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginHorizontal: 40,
+    marginBottom: 40,
+  },
+  input: {
+    height: 60,
     width: '100%',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    borderColor: '#fff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingLeft: 9,
+    color: '#fff',
+    fontSize: 16
+  },
+  loginContainer: {
+    alignItems: 'flex-end'
   },
   login: {
-    flex: 1,
+    height: 60,
+    width: 120,
+    borderColor: '#fff',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 90
   }
 });
 

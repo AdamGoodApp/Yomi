@@ -4548,6 +4548,11 @@ react-native-linear-gradient-degree@^0.0.1:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient-degree/-/react-native-linear-gradient-degree-0.0.1.tgz#faae928107e6a4646833b458ab067d1483df9f1d"
   integrity sha512-c099XLtAkqhjcBx2vsMmHP1iTt5IWzqa2Q59EtxGwm85o6jfDqCEsc2tQctBl/SQ73AsxY8Mx0A4Tj9kBe9mfw==
 
+react-native-neumorphic@^0.0.0-development:
+  version "0.0.0-development"
+  resolved "https://registry.yarnpkg.com/react-native-neumorphic/-/react-native-neumorphic-0.0.0-development.tgz#23112aed7ac11f7451603659f43bb93bde9d0271"
+  integrity sha512-JERXO9ZmJDtxWL8lshBeRiO7Yi2TeQOvykDbhedKQYUdc55IIC1CuUcBxGYNJ9/LzFgYd+edHQsOUlck7SeAlg==
+
 react-native-safe-area-context@3.1.9:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.9.tgz#48864ea976b0fa57142a2cc523e1fd3314e7247e"
