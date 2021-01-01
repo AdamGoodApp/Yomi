@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ImageBackground, TouchableOpacity, Text, TextInput} from 'react-native';
+import TextField from '../components/inputs/TextField';
+import PasswordField from '../components/inputs/PasswordField';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,33 +12,15 @@ const Login = () => {
       <View style={styles.form}>
         <Text style={{color: '#fff', fontSize: 36, fontFamily: 'SFProDisplayBold'}}>Login</Text>
 
-        <TextInput 
-          style={{...styles.input, marginBottom: 30, marginTop: 40}} 
-          onChangeText={(text: string) => setEmail(text)}
+        <TextField
+          styles={{marginBottom: 30, marginTop: 40}} 
           value={email}
-          placeholder='Email'
-          placeholderTextColor='rgba(255, 255, 255, 0.6)'
-          autoCapitalize='none'
-          autoCompleteType='email'
-          caretHidden={false}
-          clearButtonMode='while-editing'
-          keyboardAppearance='dark'
-          keyboardType='email-address'
-          textContentType='emailAddress'
+          onChange={setEmail}
         />
-        <TextInput 
-          style={{...styles.input, marginBottom: 30}} 
-          onChangeText={(text: string) => setPassword(text)}
+        <PasswordField 
+          styles={{marginBottom: 30}} 
           value={password}
-          placeholder='Password'
-          placeholderTextColor='rgba(255, 255, 255, 0.6)'
-          autoCapitalize='none'
-          autoCompleteType='password'
-          caretHidden={false}
-          clearButtonMode='while-editing'
-          keyboardAppearance='dark'
-          secureTextEntry={true}
-          textContentType='password'
+          onChange={(text: string) => setPassword(text)}
         />
 
         <View style={styles.loginContainer}>
@@ -61,18 +45,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginHorizontal: 40,
     marginBottom: 40,
-  },
-  input: {
-    height: 60,
-    width: '100%',
-    borderColor: '#fff',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingLeft: 9,
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'SFProTextRegular'
   },
   loginContainer: {
     alignItems: 'flex-end'

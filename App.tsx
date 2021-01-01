@@ -17,7 +17,7 @@ const App = () => {
   } else {
     return (
       <View style={styles.container}>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
         <Login />
       </View>
     );
