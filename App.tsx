@@ -6,7 +6,7 @@ import { useFonts } from 'expo-font';
 import Login from './src/views/login';
 
 const App = () => {
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     'SFPro': require('./assets/fonts/SF-Pro.ttf'),
     'SFProDisplayBold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
     'SFProTextRegular': require('./assets/fonts/SF-Pro-Text-Regular.otf'),

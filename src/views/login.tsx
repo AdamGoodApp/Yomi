@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, TouchableOpacity, Text, TextInput} from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Text} from 'react-native';
 import TextField from '../components/inputs/TextField';
 import PasswordField from '../components/inputs/PasswordField';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onPress = () => {
+    alert('hii');
+  }
 
   return (
     <ImageBackground style={styles.image} source={require('../../assets/login-background.jpg')}>
@@ -25,7 +29,7 @@ const Login = () => {
 
         <View style={styles.loginContainer}>
           <TouchableOpacity
-            onPress={() => alert('Hello, world!')}
+            onPress={onPress}
             style={styles.login}>
             <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Login</Text>
           </TouchableOpacity>
