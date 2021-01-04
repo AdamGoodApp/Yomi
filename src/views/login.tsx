@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ImageBackground, TouchableOpacity, Text} from 'react-native';
+import { login } from '../lib/network/user';
+import { store } from '../lib/secure-storage';
 import TextField from '../components/inputs/TextField';
 import PasswordField from '../components/inputs/PasswordField';
 
@@ -7,8 +9,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onPress = () => {
-    alert('hii');
+  const onSubmit = async () => {
+    const user = await login(email, password);
+
+    if ('error' in user) {
+      store('user', JSON.stringify(user));
+    } else {
+      console.log("Logged in");
+    }
   }
 
   return (
@@ -29,7 +37,7 @@ const Login = () => {
 
         <View style={styles.loginContainer}>
           <TouchableOpacity
-            onPress={onPress}
+            onPress={onSubmit}
             style={styles.login}>
             <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Login</Text>
           </TouchableOpacity>
