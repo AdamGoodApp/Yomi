@@ -13,6 +13,7 @@ const App = () => {
     'SFPro': require('./assets/fonts/SF-Pro.ttf'),
     'SFProDisplayBold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
     'SFProTextRegular': require('./assets/fonts/SF-Pro-Text-Regular.otf'),
+    'SFProTextBold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),
   });
 
   if (!fontsLoaded) {

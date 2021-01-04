@@ -36,6 +36,10 @@ const Login = () => {
         />
 
         <View style={styles.loginContainer}>
+          <TouchableOpacity>
+            <Text style={{ fontSize: 16, color: '#fff', fontFamily: 'SFProTextBold' }}>Forgot password?</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={onSubmit}
             style={styles.login}>
@@ -59,7 +63,9 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   loginContainer: {
-    alignItems: 'flex-end'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 90
   },
   login: {
     height: 60,
@@ -70,7 +76,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 90
   }
 });
 
