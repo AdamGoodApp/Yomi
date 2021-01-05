@@ -1,32 +1,29 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
 import Login from './login';
 import Home from './home';
+import TabBar from '../components/Tab';
 
 const Navigation = (): React.ReactElement => {
-  const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
   const { user: { auth } } = useSelector((state: any) => state);
 
   return ( 
     <NavigationContainer>
-      <Stack.Navigator>
+      <Tab.Navigator tabBar={props => <TabBar {...props} login={auth ? false : true} />}>
         {
-          !auth ? 
-          (
-            <Stack.Screen 
-              name="Login" 
-              component={Login} 
-              options={{
-                headerShown: false,
-                animationTypeForReplace: !auth ? 'pop' : 'push',
-              }} 
-            />
-          ) :
-          ( <Stack.Screen name='Home' component={Home} /> )
+          !auth ? <Tab.Screen name="Login" component={Login}  options={{tabBarVisible: false}}/>
+          :
+          (<>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Library" component={Home} />
+            <Tab.Screen name="Search" component={Home} />
+            </>
+          )
         }
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   )
 };

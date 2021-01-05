@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions/User';
 import { login } from '../lib/network/user';
 import { secureStore } from '../lib/secure-storage';
-import TextField from '../components/inputs/TextField';
-import PasswordField from '../components/inputs/PasswordField';
+import TextField from '../components/Inputs/TextField';
+import PasswordField from '../components/Inputs/PasswordField';
 
 const Login = ({ navigation }: any) => {
   const dispatch = useDispatch();

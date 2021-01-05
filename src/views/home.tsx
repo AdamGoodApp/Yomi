@@ -25,7 +25,7 @@ const Home = ({ navigation }: any): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(28,28,30)'
+    backgroundColor: '#000'
   }
 });
 
