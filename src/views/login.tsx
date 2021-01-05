@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, TouchableOpacity, Text} from 'react-native';
+import { View, StyleSheet, ImageBackground, TouchableOpacity, Text, KeyboardAvoidingView, Platform } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/actions/User';
 import { login } from '../lib/network/user';
-import { store } from '../lib/secure-storage';
+import { secureStore } from '../lib/secure-storage';
 import TextField from '../components/inputs/TextField';
 import PasswordField from '../components/inputs/PasswordField';
 
-const Login = () => {
+const Login = ({ navigation }: any) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const onSubmit = async () => {
     const user = await login(email, password);
 
-    if ('error' in user) {
-      store('user', JSON.stringify(user));
+    if(!user) {
+      return;
+    }
+
+    if ('token' in user) {
+      await secureStore('user', JSON.stringify(user));
+      dispatch(setUser({ auth: true }));
+      navigation.navigate('Home');
     } else {
-      console.log("Logged in");
+      setError(true);
     }
   }
 
   return (
     <ImageBackground style={styles.image} source={require('../../assets/login-background.jpg')}>
-      <View style={styles.form}>
+      <KeyboardAvoidingView style={styles.form} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
         <Text style={{color: '#fff', fontSize: 36, fontFamily: 'SFProDisplayBold'}}>Login</Text>
 
         <TextField
@@ -30,10 +40,14 @@ const Login = () => {
           onChange={setEmail}
         />
         <PasswordField 
-          styles={{marginBottom: 30}} 
+          styles={{marginBottom: 15}} 
           value={password}
           onChange={(text: string) => setPassword(text)}
         />
+
+        { error && <Text style={styles.error}>
+          You have entered an invalid username or password
+        </Text>}
 
         <View style={styles.loginContainer}>
           <TouchableOpacity>
@@ -46,7 +60,7 @@ const Login = () => {
             <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Login</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
@@ -65,7 +79,7 @@ const styles = StyleSheet.create({
   loginContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 90
+    marginTop: 60
   },
   login: {
     height: 60,
@@ -76,6 +90,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  error: {
+    color: 'rgb(255,55,95)', 
+    fontSize: 15, 
+    fontFamily: 'SFProDisplayBold', 
   }
 });
 
