@@ -1,6 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { Ionicons } from '@expo/vector-icons';
+
+const Icons: any = {
+  'Home': 'ios-book',
+  'Library': 'ios-library-sharp',
+  'Search': 'search'
+}
 
 const TabBar = ({ state, descriptors, navigation, login }: any) => {
   return (
@@ -43,10 +50,13 @@ const TabBar = ({ state, descriptors, navigation, login }: any) => {
             onPress={onPress}
             onLongPress={onLongPress}
             key={index}
-          >
-            <Text style={{ color: isFocused ? '#0A84FF' : '#8E8E93' }}>
-              {label}
-            </Text>
+          > 
+            <View style={styles.buttonContainer}>
+              <Ionicons name={Icons[label]} size={28} color={isFocused ? '#FFF' : '#8E8E93'} />
+              <Text style={{ fontSize: 10, color: isFocused ? '#FFF' : '#8E8E93', marginTop: 2 }}>
+                {label}
+              </Text>
+            </View >
           </TouchableOpacity>
         );
       })}
@@ -57,14 +67,17 @@ const TabBar = ({ state, descriptors, navigation, login }: any) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-around',
     height: 80,
     position: 'absolute',
     left: 0,
     bottom: 0,
     right: 0,
+    paddingTop: 5
   },
+  buttonContainer: {
+    alignItems: 'center',
+  }
 });
 
 export default TabBar;

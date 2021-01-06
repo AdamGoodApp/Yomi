@@ -19,6 +19,7 @@ const App = () => {
 
   const [fontsLoaded] = useFonts({
     'SFPro': require('./assets/fonts/SF-Pro.ttf'),
+    'SFProDisplay': require('./assets/fonts/SF-Pro-Display-Regular.otf'),
     'SFProDisplayBold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
     'SFProTextRegular': require('./assets/fonts/SF-Pro-Text-Regular.otf'),
     'SFProTextBold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),
