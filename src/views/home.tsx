@@ -1,23 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
-import { setUser } from '../store/actions/User';
-import { deleteKey } from '../lib/secure-storage';
+import { View, StyleSheet } from 'react-native';
+import Header from '../components/Header';
 
-const Home = ({ navigation }: any): React.ReactElement => {
-  const dispatch = useDispatch();
-
-  const onSubmit = async () => {
-    await deleteKey('user');
-    dispatch(setUser({ auth: false }));
-    navigation.navigate('Login');
-  };
-
+const Home = (): React.ReactElement => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onSubmit}>
-        <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Logout</Text>
-      </TouchableOpacity>
+      <Header title="Reading Now" profile />
     </View>
   )
 };
@@ -25,7 +13,10 @@ const Home = ({ navigation }: any): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+    paddingTop: '21%',
+    paddingLeft: 30,
+    paddingRight: 30,
   }
 });
 

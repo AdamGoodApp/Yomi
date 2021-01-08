@@ -1,1 +1,2 @@
 export const AUTH_EVENT = 'AUTH_EVENT';
+export const SETTINGS_EVENT = 'SETTINGS_EVENT';
