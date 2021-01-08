@@ -15,7 +15,7 @@ const Navigation = ({ navigation }: any): React.ReactElement => {
   const sheetRef: any = useRef(null);
   const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
-  const { user: { auth }, settings: { open } } = useSelector((state: any) => state);
+  const { user: { auth, account }, settings: { open } } = useSelector((state: any) => state);
 
   useEffect(() => {
     open && sheetRef.current.snapTo(0);
@@ -54,7 +54,7 @@ const Navigation = ({ navigation }: any): React.ReactElement => {
         ref={sheetRef}
         snapPoints={['94%', '0%']}
         borderRadius={5}
-        renderContent={() => <Settings onSettingsClose={onSettingsClose} onSignOut={onSignOut} />}
+        renderContent={() => <Settings onSettingsClose={onSettingsClose} onSignOut={onSignOut} user={account}/>}
         initialSnap={1}
         onCloseEnd={onSettingsClose}
       />

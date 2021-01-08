@@ -22,7 +22,7 @@ const Login = ({ navigation }: any) => {
 
     if ('token' in user) {
       await secureStore('user', JSON.stringify(user));
-      dispatch(setUser({ auth: true }));
+      dispatch(setUser({ auth: true, account: user.user }));
       navigation.navigate('Home');
     } else {
       setError(true);
