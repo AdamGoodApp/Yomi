@@ -32,11 +32,8 @@ const design = StyleSheet.create({
   input: {
     height: 60,
     width: '100%',
-    borderColor: '#fff',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingLeft: 9,
+    borderBottomColor: 'rgb(44,44,46)',
+    borderBottomWidth: 1,
     color: '#fff',
     fontSize: 16,
     fontFamily: 'SFProTextRegular'

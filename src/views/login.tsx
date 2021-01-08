@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, TouchableOpacity, Text, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Text, KeyboardAvoidingView, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions/User';
 import { login } from '../lib/network/user';
@@ -30,66 +30,77 @@ const Login = ({ navigation }: any) => {
   }
 
   return (
-    <ImageBackground style={styles.image} source={require('../../assets/login-background.jpg')}>
-      <KeyboardAvoidingView style={styles.form} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
-        <Text style={{color: '#fff', fontSize: 36, fontFamily: 'SFProDisplayBold'}}>Login</Text>
+    <View style={styles.container}>
+      <Image style={{width: 50, height: 50, marginBottom: 35}} source={require('../../assets/animatedlogo.gif')} />
 
-        <TextField
-          styles={{marginBottom: 30, marginTop: 40}} 
-          value={email}
-          onChange={setEmail}
-        />
-        <PasswordField 
-          styles={{marginBottom: 15}} 
-          value={password}
-          onChange={(text: string) => setPassword(text)}
-        />
+      <Text style={{color: '#fff', fontSize: 34, fontFamily: 'SFProDisplayBold', marginBottom: 16}}>Login</Text>
 
-        { error && <Text style={styles.error}>
-          You have entered an invalid username or password
-        </Text>}
+      <Text style={{color: '#8e8d92', fontSize: 17, fontFamily: 'SFPro'}}>Welcome to Yomi,</Text>
+      <Text style={{color: '#8e8d92', fontSize: 17, fontFamily: 'SFPro', marginBottom: 40}}>Sign in to your account to continue reading</Text>
+
+      
+      <TextField
+        styles={{marginBottom: 30}} 
+        value={email}
+        onChange={setEmail}
+      />
+      <PasswordField 
+        styles={{marginBottom: 15}} 
+        value={password}
+        onChange={(text: string) => setPassword(text)}
+      />
+
+      { error && <Text style={styles.error}>
+        You have entered an invalid username or password
+      </Text>}
 
         <View style={styles.loginContainer}>
-          <TouchableOpacity>
-            <Text style={{ fontSize: 16, color: '#fff', fontFamily: 'SFProTextBold' }}>Forgot password?</Text>
+          <TouchableOpacity onPress={onSubmit} style={styles.login}>
+            <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFProTextBold' }}>Sign In</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={onSubmit}
-            style={styles.login}>
-            <Text style={{ fontSize: 18, color: '#fff', fontFamily: 'SFPro' }}>Login</Text>
-          </TouchableOpacity>
+          <Text style={{ fontSize: 15, color: '#8e8d92', fontFamily: 'SFProTextBold' }}>Don't have an account? 
+            <TouchableOpacity style={{marginBottom: -2}}>
+              <Text style={{fontSize: 15, color: '#007AFF', fontFamily: 'SFProTextBold' }}> Create account</Text>
+            </TouchableOpacity>
+          </Text>
         </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+        
+      
+      {/* <KeyboardAvoidingView style={styles.form} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+      </KeyboardAvoidingView> */}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
     flex: 1,
-    resizeMode: 'cover',
+    backgroundColor: '#000',
+    alignItems: 'center',
+    paddingTop: 120,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   form: {
     flex: 1,
-    justifyContent: 'flex-end',
     marginHorizontal: 40,
     marginBottom: 40,
   },
   loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 60
+    width: '100%',
+    position: 'absolute',
+    bottom: 66,
+    alignItems: 'center'
   },
   login: {
-    height: 60,
-    width: 120,
-    borderColor: '#fff',
-    borderStyle: 'solid',
-    borderWidth: 1,
+    height: 56,
+    width: '100%',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 32,
+    backgroundColor: '#007AFF'
   },
   error: {
     color: 'rgb(255,55,95)', 
