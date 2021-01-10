@@ -14,9 +14,13 @@ interface Manga {
 const Card = (props: Props): React.ReactElement => {
   const {manga: { title, id, cover }} = props;
 
+  const onPress = () => {
+    alert('pressed');
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Image style={styles.image} source={{ uri: cover }} />
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
