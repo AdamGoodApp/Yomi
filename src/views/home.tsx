@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { getTop7d } from '../lib/network/manga';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import CardLoading from '../components/Card/cardLoading';
 
 const Home = (): React.ReactElement => {
   const [ mangaTop7d, setTop7d ] = useState([]);
@@ -26,11 +27,12 @@ const Home = (): React.ReactElement => {
 
         <FlatList 
           data={mangaTop7d} 
-          ListEmptyComponent={<Text style={{color: '#fff'}}>YOOMII</Text>}
+          ListEmptyComponent={<CardLoading />}
           renderItem={renderItem} 
           keyExtractor={(item: any) => item.id} 
           horizontal
           initialNumToRender={3}
+          ItemSeparatorComponent={()=> <View style={{marginRight: 18}} />}
         />
 
       </View>

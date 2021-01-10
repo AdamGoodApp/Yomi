@@ -22,19 +22,16 @@ const Card = (props: Props): React.ReactElement => {
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={onPress}>
-        <Image style={styles.image} {...{preview, uri}} transitionDuration={600} />
-        <Text style={styles.title}>{title}</Text>
+        <Image style={styles.image} {...{ preview, uri }} transitionDuration={600} />
+        <Text style={styles.title}>{ title }</Text>
       </TouchableOpacity>
     </View>
   )
 };
 
 const styles = StyleSheet.create({
-  container: {
-   marginRight: 18,
-  },
   image: {
     width: 140,
     height: 210,
