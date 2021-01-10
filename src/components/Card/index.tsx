@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image } from "react-native-expo-image-cache";
 
 interface Props {
   manga: Manga
@@ -13,15 +14,17 @@ interface Manga {
 
 const Card = (props: Props): React.ReactElement => {
   const {manga: { title, id, cover }} = props;
+  const preview = { uri: '../../../assets/bgcard.png' };
+  const uri = cover;
 
-  const onPress = () => {
+  const onPress = async () => {
     alert('pressed');
   }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
-        <Image style={styles.image} source={{ uri: cover }} />
+        <Image style={styles.image} {...{preview, uri}} transitionDuration={600} />
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     </View>
