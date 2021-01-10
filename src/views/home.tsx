@@ -5,9 +5,9 @@ import Header from '../components/Header';
 import Card from '../components/Card';
 import CardLoading from '../components/Card/cardLoading';
 
-const Home = (): React.ReactElement => {
+const Home = ({ navigation }: any): React.ReactElement => {
   const [ mangaTop7d, setTop7d ] = useState([]);
-  const renderItem = ({ item }: any) => <Card manga={item} />
+  const renderItem = ({ item }: any) => <Card manga={item} navigation={navigation} />
 
   useEffect(() => {
     const get = async () => {

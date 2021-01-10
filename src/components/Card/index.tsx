@@ -4,6 +4,7 @@ import { Image } from "react-native-expo-image-cache";
 
 interface Props {
   manga: Manga
+  navigation: any
 }
 
 interface Manga {
@@ -13,12 +14,12 @@ interface Manga {
 }
 
 const Card = (props: Props): React.ReactElement => {
-  const {manga: { title, id, cover }} = props;
+  const {manga: { title, id, cover }, navigation } = props;
   const preview = { uri: '../../../assets/bgcard.png' };
   const uri = cover;
 
   const onPress = async () => {
-    alert('pressed');
+    navigation.navigate('Info', { id: id });
   }
 
   return (
