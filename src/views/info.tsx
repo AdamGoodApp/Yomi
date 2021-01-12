@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import ReadMore from '@fawazahmed/react-native-read-more';
+import Ratings from '../components/Ratings';
 
 const Info = ({ route, navigation }: any): React.ReactElement => {
   const { manga } = route.params;
@@ -7,7 +9,9 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
     title: { english, romaji }, 
     coverImage: { extraLarge }, 
     bannerImage, 
-    description 
+    description ,
+    meanScore,
+    favourites
   } = manga;
   const cleanedDesc: string = description.split('<br>')[0];
 
@@ -16,11 +20,23 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
       <Image style={styles.bannerImage} source={{uri: bannerImage || extraLarge }} />
 
       <View style={styles.content}>
-        <View>
+        <View style={{ borderBottomColor: 'rgb(44,44,46)', borderBottomWidth: 0.5, paddingBottom: 10, marginBottom: 28}}>
           <Text style={{color: '#fff', fontFamily: 'SFProTextBold', fontSize: 32, marginBottom: 12}}>{english || romaji}</Text>
 
-          <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>{ cleanedDesc }</Text>
+          <ReadMore 
+            numberOfLines={5} 
+            style={styles.textStyle} 
+            seeMoreText="More" 
+            backgroundColor="#000"
+            seeMoreStyle={{color: '#fff', fontFamily: 'SFProTextBold'}}
+            seeLessStyle={{}}
+          >
+
+            <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>{ cleanedDesc }</Text>
+          </ReadMore>
         </View>
+
+        <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
       </View>
     </View>
   )
@@ -40,7 +56,10 @@ const styles = StyleSheet.create({
     paddingLeft: 32,
     paddingRight: 32,
     marginTop: 26
-  }
+  },
+  textStyle: {
+    fontSize: 14,
+  },
 });
 
 export default Info;

@@ -30,7 +30,7 @@ const Home = ({ navigation }: any): React.ReactElement => {
           data={trending} 
           ListEmptyComponent={<CardLoading />}
           renderItem={renderItem} 
-          keyExtractor={(item: any) => item.id} 
+          keyExtractor={(item: any) => `${item.id}`} 
           horizontal
           initialNumToRender={3}
           ItemSeparatorComponent={()=> <View style={{marginRight: 18}} />}

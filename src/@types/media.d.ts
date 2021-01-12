@@ -4,6 +4,8 @@ interface IManga {
   id: number;
   bannerImage: string;
   description: string;
+  meanScore: number;
+  favourites: number;
 }
 
 interface ITitle {

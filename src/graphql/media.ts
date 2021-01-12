@@ -13,6 +13,8 @@ export const trendingQuery = `
         }
         bannerImage
         description(asHtml: false)
+        meanScore
+        favourites
       }
     }
   }

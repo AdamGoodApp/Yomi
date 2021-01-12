@@ -1127,6 +1127,13 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
+"@fawazahmed/react-native-read-more@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@fawazahmed/react-native-read-more/-/react-native-read-more-1.1.3.tgz#700ac87b16846c6d066c5d7527a5174accb68092"
+  integrity sha512-5wBZnXyWIHVdfFDN3G58KwDV8+E24kThwVXpR4+iJL5sgH6dtThV7VEg6NSiz0JxSKQ/fldpOz9DOqCZGSN+NA==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -5040,16 +5047,6 @@ react-native-iphone-x-helper@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
-
-react-native-linear-gradient-degree@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient-degree/-/react-native-linear-gradient-degree-0.0.1.tgz#faae928107e6a4646833b458ab067d1483df9f1d"
-  integrity sha512-c099XLtAkqhjcBx2vsMmHP1iTt5IWzqa2Q59EtxGwm85o6jfDqCEsc2tQctBl/SQ73AsxY8Mx0A4Tj9kBe9mfw==
-
-react-native-neumorphic@^0.0.0-development:
-  version "0.0.0-development"
-  resolved "https://registry.yarnpkg.com/react-native-neumorphic/-/react-native-neumorphic-0.0.0-development.tgz#23112aed7ac11f7451603659f43bb93bde9d0271"
-  integrity sha512-JERXO9ZmJDtxWL8lshBeRiO7Yi2TeQOvykDbhedKQYUdc55IIC1CuUcBxGYNJ9/LzFgYd+edHQsOUlck7SeAlg==
 
 react-native-reanimated@~1.13.0:
   version "1.13.2"
