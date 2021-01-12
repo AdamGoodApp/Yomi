@@ -1,32 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-
-interface Props {
-  id: number;
-}
+import React from 'react';
+import { View, StyleSheet, Text, Image } from 'react-native';
 
 const Info = ({ route, navigation }: any): React.ReactElement => {
-  const { id } = route.params;
-  const [manga, setManga] = useState(undefined);
+  const { manga } = route.params;
+  const { 
+    title: { english, romaji }, 
+    coverImage: { extraLarge }, 
+    bannerImage, 
+    description 
+  } = manga;
+  const cleanedDesc: string = description.split('<br>')[0];
 
-  useEffect(() => {
-    const getManga = async () => {
+  return (
+    <View style={styles.container}>
+      <Image style={styles.bannerImage} source={{uri: bannerImage || extraLarge }} />
 
-    };
+      <View style={styles.content}>
+        <View>
+          <Text style={{color: '#fff', fontFamily: 'SFProTextBold', fontSize: 32, marginBottom: 12}}>{english || romaji}</Text>
 
-    getManga();
-  },[id]);
-
-  return <View style={styles.container}></View>
+          <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>{ cleanedDesc }</Text>
+        </View>
+      </View>
+    </View>
+  )
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
+  },
+  bannerImage: {
+    width: '100%',
+    height: 240,
+    resizeMode: 'cover'
+  },
+  content: {
+    paddingLeft: 32,
+    paddingRight: 32,
+    marginTop: 26
   }
 });
 

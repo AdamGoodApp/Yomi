@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
-import { getTop7d } from '../lib/network/manga';
+import { aniApi } from '../lib/network/http';
+import { trendingQuery } from '../graphql/media';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import CardLoading from '../components/Card/cardLoading';
 
 const Home = ({ navigation }: any): React.ReactElement => {
-  const [ mangaTop7d, setTop7d ] = useState([]);
+  const [ trending, setTrending ] = useState([]);
   const renderItem = ({ item }: any) => <Card manga={item} navigation={navigation} />
 
   useEffect(() => {
     const get = async () => {
-      const { top7d }: any = await getTop7d();
-      setTop7d(top7d);
+      const {data : {Page: { media }}} = await aniApi(trendingQuery, { perPage: 20 });
+      setTrending(media);
     }
-  
+
     get();
   }, []);
   
@@ -26,13 +27,14 @@ const Home = ({ navigation }: any): React.ReactElement => {
         <Text style={{color: '#fff', fontFamily: 'SFProTextBold', fontSize: 22, marginBottom: 10}}>Trending</Text>
 
         <FlatList 
-          data={mangaTop7d} 
+          data={trending} 
           ListEmptyComponent={<CardLoading />}
           renderItem={renderItem} 
           keyExtractor={(item: any) => item.id} 
           horizontal
           initialNumToRender={3}
           ItemSeparatorComponent={()=> <View style={{marginRight: 18}} />}
+          showsHorizontalScrollIndicator={false}
         />
 
       </View>

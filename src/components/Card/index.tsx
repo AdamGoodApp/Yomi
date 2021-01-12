@@ -3,30 +3,25 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Image } from "react-native-expo-image-cache";
 
 interface Props {
-  manga: Manga
+  manga: IManga
   navigation: any
 }
 
-interface Manga {
-  title: string;
-  id: number;
-  cover: string;
-}
-
 const Card = (props: Props): React.ReactElement => {
-  const {manga: { title, id, cover }, navigation } = props;
+  const { manga, navigation } = props;
+  const { coverImage, title } = manga;
   const preview = { uri: '../../../assets/bgcard.png' };
-  const uri = cover;
+  const uri = coverImage.large;
 
   const onPress = async () => {
-    navigation.navigate('Info', { id: id });
+    navigation.navigate('Info', { manga: manga });
   }
 
   return (
     <View>
       <TouchableOpacity onPress={onPress}>
         <Image style={styles.image} {...{ preview, uri }} transitionDuration={600} />
-        <Text style={styles.title}>{ title }</Text>
+        <Text style={styles.title}>{ title.english || title.romaji }</Text>
       </TouchableOpacity>
     </View>
   )
