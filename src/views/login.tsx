@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, Text, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions/User';
 import { login } from '../lib/network/user';
@@ -65,10 +65,6 @@ const Login = ({ navigation }: any) => {
             </TouchableOpacity>
           </Text>
         </View>
-        
-      
-      {/* <KeyboardAvoidingView style={styles.form} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
-      </KeyboardAvoidingView> */}
     </View>
   );
 }

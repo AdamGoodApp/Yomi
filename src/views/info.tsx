@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import Ratings from '../components/Ratings';
 
@@ -36,7 +36,12 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
           </ReadMore>
         </View>
 
-        <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
+        <View style={{flexDirection: "row", justifyContent: "space-between" }}>
+          <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
+          <TouchableOpacity>
+            <Image style={{width: 37, height: 37}} source={require('../../assets/text-badge-plus.png')} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
