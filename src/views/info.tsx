@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import Ratings from '../components/Ratings';
+import Stats from '../components/Stats';
 
 const Info = ({ route, navigation }: any): React.ReactElement => {
   const { manga } = route.params;
@@ -11,8 +12,12 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
     bannerImage, 
     description ,
     meanScore,
-    favourites
-  } = manga;
+    favourites,
+    genres,
+    startDate,
+    chapters,
+    staff: { nodes }
+  }: IManga = manga;
   const cleanedDesc: string = description.split('<br>')[0];
 
   return (
@@ -36,12 +41,21 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
           </ReadMore>
         </View>
 
-        <View style={{flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{
+          flexDirection: "row", 
+          justifyContent: "space-between", 
+          borderBottomColor: 'rgb(44,44,46)',
+          borderBottomWidth: 0.5, 
+          paddingBottom: 28, 
+          marginBottom: 28 
+        }}>
           <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
           <TouchableOpacity>
             <Image style={{width: 37, height: 37}} source={require('../../assets/text-badge-plus.png')} />
           </TouchableOpacity>
         </View>
+
+        <Stats genres={genres} date={startDate} chapters={chapters} staff={nodes}/>
       </View>
     </View>
   )

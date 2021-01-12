@@ -15,6 +15,20 @@ export const trendingQuery = `
         description(asHtml: false)
         meanScore
         favourites
+        genres
+        startDate {
+          year
+          month
+          day
+        }
+        chapters
+        staff(sort: FAVOURITES_DESC) {
+        	nodes {
+        	  name {
+        	    full
+        	  }
+        	}
+      	}
       }
     }
   }

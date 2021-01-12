@@ -6,6 +6,10 @@ interface IManga {
   description: string;
   meanScore: number;
   favourites: number;
+  genres: [string];
+  startDate: IFuzzyDate;
+  chapters: number;
+  staff: { nodes: [IStaff] }
 }
 
 interface ITitle {
@@ -16,4 +20,14 @@ interface ITitle {
 interface ICoverImage {
   large: string;
   extraLarge: string;
+}
+
+interface IFuzzyDate {
+  year: number;
+  month: number;
+  day: number;
+}
+
+interface IStaff {
+  name: { full: string }
 }
