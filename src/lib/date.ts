@@ -15,4 +15,12 @@ export const getMonth = (month: number) => {
     ];
 
     return months[month - 1];
+};
+
+export const parseDate = (timestamp: number): string => {
+  const milliseconds = timestamp * 1000;
+  const date = new Date(milliseconds);
+  const humanDateFormat = date.toLocaleString("en-US", {month: "short", day: 'numeric', year: 'numeric'})
+
+  return humanDateFormat;
 }

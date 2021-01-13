@@ -12,7 +12,9 @@ interface Props {
 
 const Stats = (props: Props): React.ReactElement => {
   const { genres, date: { year, month, day }, chapters, staff} = props;
-  const { name: { full } } = staff[0];
+  // const { name: { full } } = staff[0];
+  const author = staff[0];
+  const name = author ? author.name.full : '';
 
   return(
     <View style={styles.container}>
@@ -36,7 +38,7 @@ const Stats = (props: Props): React.ReactElement => {
 
       <View style={styles.itemContainer}>
         <Text style={styles.text}>author</Text>
-        <Text style={{color: '#fff', fontFamily: 'SFProTextRegular', textAlign: 'center'}}>{ full }</Text>
+        <Text style={{color: '#fff', fontFamily: 'SFProTextRegular', textAlign: 'center'}}>{ name }</Text>
       </View>
     </View>
   )

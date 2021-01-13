@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import Ratings from '../components/Ratings';
 import Stats from '../components/Stats';
+import Review from '../components/Card/review';
+import CardLoading from '../components/Card/cardLoading';
 
 const Info = ({ route, navigation }: any): React.ReactElement => {
   const { manga } = route.params;
@@ -16,9 +18,11 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
     genres,
     startDate,
     chapters,
-    staff: { nodes }
+    staff: { nodes },
+    reviews
   }: IManga = manga;
   const cleanedDesc: string = description.split('<br>')[0];
+  const renderItem = ({ item }: any) => <Review review={item} />
 
   return (
     <View style={styles.container}>
@@ -56,6 +60,24 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
         </View>
 
         <Stats genres={genres} date={startDate} chapters={chapters} staff={nodes}/>
+
+        {
+          reviews.nodes.length > 0 &&
+            <View>
+              <Text style={{ color: '#fff', marginBottom: 15, fontSize: 18, fontFamily: 'SFProTextRegular' }}>Reviews</Text>
+
+              <FlatList 
+              data={reviews.nodes} 
+              ListEmptyComponent={<CardLoading />}
+              renderItem={renderItem}
+              keyExtractor={(item: any) => `${item.id}`} 
+              horizontal
+              initialNumToRender={3}
+              ItemSeparatorComponent={()=> <View style={{marginRight: 18}} />}
+              showsHorizontalScrollIndicator={false}
+            />
+            </View>
+        }
       </View>
     </View>
   )

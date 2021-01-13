@@ -10,6 +10,7 @@ interface IManga {
   startDate: IFuzzyDate;
   chapters: number;
   staff: { nodes: [IStaff] }
+  reviews: { nodes: [IReviews] }
 }
 
 interface ITitle {
@@ -30,4 +31,12 @@ interface IFuzzyDate {
 
 interface IStaff {
   name: { full: string }
+}
+
+interface IReviews {
+  id: number;
+  summary: string;
+  score: number;
+  user: { name: string }
+  createdAt: number
 }

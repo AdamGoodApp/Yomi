@@ -28,7 +28,18 @@ export const trendingQuery = `
         	    full
         	  }
         	}
-      	}
+        }
+        reviews(sort: UPDATED_AT_DESC, limit: 10) {
+          nodes {
+            id
+            summary
+            score
+            user {
+              name
+            }
+            createdAt
+          }
+        }
       }
     }
   }

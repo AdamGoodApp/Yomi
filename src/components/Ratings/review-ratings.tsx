@@ -7,13 +7,13 @@ interface Props {
   ratings?: number;
 }
 
-const Ratings = (props: Props): React.ReactElement => {
+const ReviewRatings = (props: Props): React.ReactElement => {
   const { score, ratings, style } = props;
 
   const styles = StyleSheet.create({
     container: {
       position: 'relative',
-      width: 94,
+      width: 80,
     },
     imageContainer: {
       flexDirection: 'row',
@@ -21,20 +21,20 @@ const Ratings = (props: Props): React.ReactElement => {
       zIndex: 99,
     },
     image: {
-      width: 15,
-      height: 15,
+      width: 12,
+      height: 12,
     },
     bar: {
       backgroundColor: '#fff', 
       width: `${score}%`, 
-      height: 15, 
+      height: 12, 
       position: 'absolute',
       zIndex: 0
     },
     seperator: {
-      backgroundColor: '#000',
+      backgroundColor: '#1c1c1e',
       width: 5,
-      height: 15
+      height: 12
     }
   });
 
@@ -42,25 +42,21 @@ const Ratings = (props: Props): React.ReactElement => {
     <View>
       <View style={[styles.container, style]}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={require('../../../assets/star.png')} />
+          <Image style={styles.image} source={require('../../../assets/star-review.png')} />
           <View style={styles.seperator} />
-          <Image style={styles.image} source={require('../../../assets/star.png')} />
+          <Image style={styles.image} source={require('../../../assets/star-review.png')} />
           <View style={styles.seperator} />
-          <Image style={styles.image} source={require('../../../assets/star.png')} />
+          <Image style={styles.image} source={require('../../../assets/star-review.png')} />
           <View style={styles.seperator} />
-          <Image style={styles.image} source={require('../../../assets/star.png')} />
+          <Image style={styles.image} source={require('../../../assets/star-review.png')} />
           <View style={styles.seperator} />
-          <Image style={{...styles.image, marginRight: 0}} source={require('../../../assets/star.png')} />
+          <Image style={{...styles.image, marginRight: 0}} source={require('../../../assets/star-review.png')} />
         </View>
 
         <View style={styles.bar}/>
       </View>
-
-      {
-        ratings && <Text style={{color: '#8e8d92', fontSize: 12, marginTop: 8}}>{ratings} Ratings</Text>
-      }
     </View>
   );
 }
 
-export default Ratings;
+export default ReviewRatings;
