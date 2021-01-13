@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { getMonth } from '../../lib/date';
+import GenreIcon from './genre-icon';
 
 interface Props {
   genres: [string];
@@ -18,7 +18,7 @@ const Stats = (props: Props): React.ReactElement => {
     <View style={styles.container}>
       <View style={styles.itemContainer}>
         <Text style={styles.text}>genre</Text>
-        <MaterialIcons name="science" size={30} color="white" />
+        <GenreIcon genre={ genres[0] }/>
         <Text style={{textAlign: 'center', color: '#fff', fontFamily: 'SFProTextRegular'}}>{ genres[0] }</Text>
       </View>
 
@@ -35,7 +35,7 @@ const Stats = (props: Props): React.ReactElement => {
       </View>
 
       <View style={styles.itemContainer}>
-        <Text style={styles.text}>publisher</Text>
+        <Text style={styles.text}>author</Text>
         <Text style={{color: '#fff', fontFamily: 'SFProTextRegular', textAlign: 'center'}}>{ full }</Text>
       </View>
     </View>
