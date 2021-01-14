@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import Ratings from '../Ratings';
@@ -30,9 +30,17 @@ const Full = (props: Props): React.ReactElement => {
   const cleanedDesc: string = description.split('<br>')[0];
   const renderReview = ({ item }: any) => <Review review={item} />
   const renderCard = ({ item }: any) => <RecommendedCard manga={item} navigation={props.navigation} />
+  const scrollRef = useRef<any>();
+  const recommendedScrollRef = useRef<any>();
+
+  // Reset scrolls to start position on component render
+  useEffect(() => {
+    scrollRef.current.scrollTo({x: 0, y: 0});
+    recommendedScrollRef.current.scrollToIndex({index: 0});
+  });
 
   return (
-    <ScrollView style={styles.container} indicatorStyle={'white'}>
+    <ScrollView style={styles.container} indicatorStyle={'white'} ref={scrollRef}>
       <Image style={styles.bannerImage} source={{uri: bannerImage || extraLarge }} />
 
       <View style={styles.content}>
@@ -100,10 +108,11 @@ const Full = (props: Props): React.ReactElement => {
           <Text style={{ color: '#fff', marginBottom: 15, fontSize: 18, fontFamily: 'SFProTextRegular' }}>Recommendations</Text>
 
           <FlatList 
+            ref={recommendedScrollRef}
             data={recommendations.nodes} 
             ListEmptyComponent={<CardLoading />}
             renderItem={renderCard}
-            keyExtractor={(item: any) => `${item.id}`} 
+            keyExtractor={(item: any) => `${item.mediaRecommendation.id}`} 
             horizontal
             initialNumToRender={3}
             ItemSeparatorComponent={()=> <View style={{marginRight: 18}} />}

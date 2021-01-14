@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Image } from "react-native-expo-image-cache";
+import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 interface Props {
   manga: { mediaRecommendation: IManga };
@@ -9,9 +8,7 @@ interface Props {
 
 const RecommendedCard = (props: Props): React.ReactElement => {
   const { manga: { mediaRecommendation }, navigation } = props;
-  const { coverImage, title, id } = mediaRecommendation;
-  const preview = { uri: '../../../assets/bgcard.png' };
-  const uri = coverImage.large;
+  const { coverImage: {large}, title, id } = mediaRecommendation;
 
   const onPress = async () => {
     navigation.navigate('Info', { id: id });
@@ -20,7 +17,7 @@ const RecommendedCard = (props: Props): React.ReactElement => {
   return (
     <View>
       <TouchableOpacity onPress={onPress}>
-        <Image style={styles.image} {...{ preview, uri }} transitionDuration={600} />
+        <Image style={styles.image} source={{uri: large }}  />
         <Text style={styles.title}>{ title.english || title.romaji }</Text>
       </TouchableOpacity>
     </View>
