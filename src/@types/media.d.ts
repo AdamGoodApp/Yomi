@@ -9,8 +9,9 @@ interface IManga {
   genres: [string];
   startDate: IFuzzyDate;
   chapters: number;
-  staff: { nodes: [IStaff] }
-  reviews: { nodes: [IReviews] }
+  staff: { nodes: [IStaff] };
+  reviews: { nodes: [IReviews] };
+  recommendations: { nodes: [IManga] }
 }
 
 interface ITitle {

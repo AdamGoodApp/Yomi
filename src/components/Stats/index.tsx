@@ -36,7 +36,7 @@ const Stats = (props: Props): React.ReactElement => {
         <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>Chapters</Text>
       </View>
 
-      <View style={styles.itemContainer}>
+      <View style={{...styles.itemContainer, borderRightWidth: 0 }}>
         <Text style={styles.text}>author</Text>
         <Text style={{color: '#fff', fontFamily: 'SFProTextRegular', textAlign: 'center'}}>{ name }</Text>
       </View>

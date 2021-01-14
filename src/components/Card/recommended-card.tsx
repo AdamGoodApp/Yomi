@@ -3,13 +3,13 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Image } from "react-native-expo-image-cache";
 
 interface Props {
-  manga: IManga;
+  manga: { mediaRecommendation: IManga };
   navigation: any;
 }
 
-const Card = (props: Props): React.ReactElement => {
-  const { manga, navigation } = props;
-  const { coverImage, title, id } = manga;
+const RecommendedCard = (props: Props): React.ReactElement => {
+  const { manga: { mediaRecommendation }, navigation } = props;
+  const { coverImage, title, id } = mediaRecommendation;
   const preview = { uri: '../../../assets/bgcard.png' };
   const uri = coverImage.large;
 
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Card;
+export default RecommendedCard;
