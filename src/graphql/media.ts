@@ -74,3 +74,16 @@ export const mangaQuery = `
     }
   }
 `
+
+export const getMangaChapters = `
+  query($id: Int!) {
+    getMangaChapters(mangaId: $id){
+      chapters {
+        id
+        chapter
+        title
+        language
+      }
+    }
+  }
+`

@@ -6,6 +6,7 @@ import Stats from '../Stats';
 import Review from '../Card/review';
 import RecommendedCard from '../Card/recommended-card';
 import CardLoading from '../Card/cardLoading';
+import Chapters from '../Chapters';
 
 interface Props {
   manga: IManga;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const Full = (props: Props): React.ReactElement => {
-  const { 
+  const {
     title: { english, romaji }, 
     coverImage: { extraLarge }, 
     bannerImage, 
@@ -127,6 +128,8 @@ const Full = (props: Props): React.ReactElement => {
           marginBottom: 28 
         }}>
           <Text style={{ color: '#fff', marginBottom: 15, fontSize: 18, fontFamily: 'SFProTextRegular' }}>Chapters</Text>
+
+          <Chapters navigation={props.navigation} title={english || romaji}/>
         </View>
       </View>
     </ScrollView>

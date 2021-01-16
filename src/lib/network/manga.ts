@@ -1,39 +1,16 @@
+import { yomiApi } from '../network/http';
 import { getKey } from '../secure-storage';
 
-export const top24 = async () => {
+export const manganeloChapters = async (title: string) => {
   const masterKey = await getKey('master_key');
+  const chapters = await yomiApi(`manga/${title}`, { "access_token": masterKey });
 
-  if(masterKey ) {
-    try {
-      const response = await fetch(`https://yomi-server.herokuapp.com/manga?access_token=${masterKey}&list=top24`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    
-      return await response.json();
-    } catch (err) {
-      return {error: 'unauthorized'}
-    }
-  }
-};
+  return chapters;
+}
 
-export const getTop7d = async () => {
+export const manganeloPages = async (page: string) => {
   const masterKey = await getKey('master_key');
+  const pages = await yomiApi(`manga/`, { "access_token": masterKey, manga: page });
 
-  if(masterKey ) {
-    try {
-      const response = await fetch(`https://yomi-server.herokuapp.com/manga?access_token=${masterKey}&list=top7d`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    
-      return await response.json();
-    } catch (err) {
-      return {error: 'unauthorized'}
-    }
-  }
+  return pages;
 };

@@ -9,6 +9,7 @@ import { deleteKey } from '../lib/secure-storage';
 import Login from './login';
 import Home from './home';
 import Info from './info';
+import Reader from './reader';
 import TabBar from '../components/Tab';
 import Settings from '../components/Settings';
 
@@ -47,6 +48,7 @@ const Navigation = ({ navigation }: any): React.ReactElement => {
             <Tab.Screen name="Library" component={Home} />
             <Tab.Screen name="Search" component={Home} />
             <Tab.Screen name="Info" component={Info} />
+            <Tab.Screen name="Reader" component={Reader} />
           </>
           )
         }
