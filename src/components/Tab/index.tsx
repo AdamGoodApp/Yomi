@@ -41,24 +41,28 @@ const TabBar = ({ state, descriptors, navigation, login }: any) => {
           });
         };
 
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            key={index}
-          > 
-            <View style={styles.buttonContainer}>
-              <Ionicons name={Icons[label]} size={28} color={isFocused ? '#FFF' : '#8E8E93'} />
-              <Text style={{ fontSize: 10, color: isFocused ? '#FFF' : '#8E8E93', marginTop: 2 }}>
-                {label}
-              </Text>
-            </View >
-          </TouchableOpacity>
-        );
+        if(label === 'Info' || label === 'Reader') {
+          
+        } else {
+          return (
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              key={index}
+            > 
+              <View style={styles.buttonContainer}>
+                <Ionicons name={Icons[label]} size={28} color={isFocused ? '#FFF' : '#8E8E93'} />
+                <Text style={{ fontSize: 10, color: isFocused ? '#FFF' : '#8E8E93', marginTop: 2 }}>
+                  {label}
+                </Text>
+              </View >
+            </TouchableOpacity>
+          );
+        }
       })}
     </BlurView>
   );

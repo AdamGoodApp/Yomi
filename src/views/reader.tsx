@@ -66,6 +66,7 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
               renderImage={(props) => <Image {...props} style={{ width: '100%', height: '100%', marginTop: -90}}/>}
               renderIndicator={() => <></>}
               onClick={handleOnClick}
+              enablePreload
             />
           </Modal>
         )

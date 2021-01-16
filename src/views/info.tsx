@@ -21,7 +21,7 @@ const Info = ({ route, navigation }: any): React.ReactElement => {
   return(
     <View style={{flex: 1, backgroundColor: '#000', justifyContent: 'center'}}>
       {
-        manga ?  <Full manga={manga} navigation={navigation} /> : <ActivityIndicator size="large" color={'white'} />
+        manga ?  <Full manga={manga} navigation={navigation} /> : <ActivityIndicator size="small" color={'white'} />
       }
     </View>
   );

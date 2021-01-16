@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { manganeloChapters } from '../../lib/network/manga';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -24,33 +24,42 @@ const Chapters = (props: Props): React.ReactElement => {
   const handleOnPress = (page: string) => {
     navigation.navigate('Reader', { page: page });
   }
+
+  if (chapters.length > 0) {
+    return (
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+        {
+          chapters.map((item: any, index: number) => (
+            <TouchableOpacity style={styles.container} key={index} onPress={() => handleOnPress(item.href)} >
+              <View style={{ justifyContent: 'space-between', height: '100%' }}>
+                <Text style={{color: '#fff'}}>{item.title}</Text>
   
-  return (
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-      {
-        chapters.length > 0 &&
-        chapters.map((item: any, index: number) => (
-          <TouchableOpacity style={styles.container} key={index} onPress={() => handleOnPress(item.href)} >
-            <View style={{ justifyContent: 'space-between', height: '100%' }}>
-              <Text style={{color: '#fff'}}>{item.title}</Text>
-
-              <View style={{flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'center' }}>
-                  <Ionicons name="ios-eye-sharp" size={15} color="#8e8d92" />
-                  <Text style={ styles.subText } >{item.views}</Text>
-                </View>
-
-                <View style={{ alignItems: 'center' }}>
-                  <Ionicons name="ios-calendar-sharp" size={15} color="#8e8d92" />
-                  <Text style={ styles.subText } >{item.uploaded}</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Ionicons name="ios-eye-sharp" size={15} color="#8e8d92" />
+                    <Text style={ styles.subText } >{item.views}</Text>
+                  </View>
+  
+                  <View style={{ alignItems: 'center' }}>
+                    <Ionicons name="ios-calendar-sharp" size={15} color="#8e8d92" />
+                    <Text style={ styles.subText } >{item.uploaded}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        ))
-      }
-    </View>
-  )
+            </TouchableOpacity>
+          )) 
+        }
+      </View>
+    )
+  } else {
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center', height: 60, marginBottom: 50}}>
+        <ActivityIndicator size="small" color={'white'} />
+      </View>
+    )
+  }
+  
+  
 };
 
 const styles = StyleSheet.create({
