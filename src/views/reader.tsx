@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Modal, Dimensions, Image, Text } from 'react-native';
+import { View, StyleSheet, Modal, Dimensions, Image } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { manganeloPages } from '../lib/network/manga';
 import Header from '../components/Reader/header';
 
 const Reader = ({ route, navigation }: any): React.ReactElement => {
   const { params: { page } } = route;
-  const [pages, setPages] = useState([]);
-  const [visible, setVisible] = useState(true);
+  const [pages, setPages] = useState<[]>([]);
+  const [visible, setVisible] = useState<boolean>(true);
+  const [headerVisible, setHeaderVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const getPages = async() => {
@@ -41,6 +42,10 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
     navigation.navigate('Info');
   }
 
+  const handleOnClick = () => {
+    setHeaderVisible(!headerVisible);
+  }
+
   return (
     <View style={styles.container}>
       {
@@ -50,9 +55,17 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
             <ImageViewer 
               imageUrls={pages} 
               saveToLocalByLongPress={false}
-              renderHeader={(currentIndex)  => <Header handleClose={handleClose} currentIndex={currentIndex} total={pages.length}/>}
+              renderHeader={ (currentIndex)  => 
+                <Header 
+                  handleClose={handleClose} 
+                  currentIndex={currentIndex} 
+                  total={pages.length} 
+                  visible={headerVisible}
+                />
+              }
               renderImage={(props) => <Image {...props} style={{ width: '100%', height: '100%', marginTop: -90}}/>}
               renderIndicator={() => <></>}
+              onClick={handleOnClick}
             />
           </Modal>
         )

@@ -6,21 +6,26 @@ interface Props {
   handleClose: any;
   currentIndex: any;
   total: any;
+  visible: boolean;
 }
 
 const Header = (props: Props): React.ReactElement => {
-  const { handleClose, currentIndex, total } = props;
+  const { handleClose, currentIndex, total, visible } = props;
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleClose}>
-        <Feather name="chevron-left" size={38} color="white" />
-      </TouchableOpacity>
-
-      <Text style={{color: '#fff', fontSize: 16}}>{currentIndex + 1} of {total}</Text>
-      <View style={{width: 50}} />
-    </View>
-  )
+  if (visible) {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={handleClose}>
+          <Feather name="chevron-left" size={38} color="white" />
+        </TouchableOpacity>
+  
+        <Text style={{color: '#fff', fontSize: 16}}>{currentIndex + 1} of {total}</Text>
+        <View style={{width: 50}} />
+      </View>
+    )
+  } else {
+    return <View  style={{height: 90}} />
+  }
 };
 
 const styles = StyleSheet.create({
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   }
 });
 
