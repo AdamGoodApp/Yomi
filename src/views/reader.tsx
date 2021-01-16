@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Modal, Dimensions } from 'react-native';
+import { View, StyleSheet, Modal, Dimensions, Image, Text } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { manganeloPages } from '../lib/network/manga';
+import Header from '../components/Reader/header';
 
 const Reader = ({ route, navigation }: any): React.ReactElement => {
   const { params: { page } } = route;
   const [pages, setPages] = useState([]);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const getPages = async() => {
@@ -28,13 +30,15 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
       });
 
       setPages(images);
+      setVisible(true);
     };
 
     getPages();
   }, [page]);
 
-  const handleCLose = () => {
-    navigation.goBack();
+  const handleClose = () => {
+    setVisible(false);
+    navigation.navigate('Info');
   }
 
   return (
@@ -42,8 +46,14 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
       {
         pages.length > 0 &&
         (
-          <Modal visible={true} transparent={true}>
-            <ImageViewer imageUrls={pages}/>
+          <Modal visible={visible} transparent={true}>
+            <ImageViewer 
+              imageUrls={pages} 
+              saveToLocalByLongPress={false}
+              renderHeader={(currentIndex)  => <Header handleClose={handleClose} currentIndex={currentIndex} total={pages.length}/>}
+              renderImage={(props) => <Image {...props} style={{ width: '100%', height: '100%', marginTop: -90}}/>}
+              renderIndicator={() => <></>}
+            />
           </Modal>
         )
       }
@@ -55,11 +65,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    paddingTop: '21%',
+    position: 'absolute'
   },
   image: {
     width: '100%',
-    height: '100%'
+    height: '100%',
   }
 });
 
