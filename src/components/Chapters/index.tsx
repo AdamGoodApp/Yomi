@@ -1,28 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { manganeloChapters } from '../../lib/network/manga';
+import { bookmark, me } from '../../lib/network/user';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
   title: string;
   navigation: any;
+  route: any;
+  mangaID: number;
 }
 
 const Chapters = (props: Props): React.ReactElement => {
-  const { navigation, title } = props;
+  const { navigation, route: { params }, title, mangaID } = props;
   const [chapters, setChapters] = useState([]);
+  const [bookmarkStore, setBookmark] = useState<any>(null);
 
   useEffect(() => {
-    const mangaChapters = async () => {
+    const getChapters = async () => {
       const { chapters } = await manganeloChapters(title);
+
       setChapters(chapters);
     };
     
-    mangaChapters();
+    getChapters();
   }, [title]);
 
-  const handleOnPress = (page: string) => {
+  useEffect(() => {
+    const getBookmark = async () => {
+      const { bookmark } = await me();
+      setBookmark(bookmark);
+    };
+    
+    getBookmark();
+  }, [params.reader, title]);
+
+  const handleOnPress = async (page: string) => {
+    bookmark({ bookmark: { mangaID: mangaID, chapterID: page }});
     navigation.navigate('Reader', { page: page });
+  }
+
+  const setBGColor = (chapter: string) => {
+    if(chapter && bookmarkStore) {
+      return bookmarkStore.chapterID === chapter ? 'rgb(58,58,60)' : '#1c1c1e';
+    } else {
+      return '#1c1c1e';
+    }
   }
 
   if (chapters.length > 0) {
@@ -30,7 +53,7 @@ const Chapters = (props: Props): React.ReactElement => {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
         {
           chapters.map((item: any, index: number) => (
-            <TouchableOpacity style={styles.container} key={index} onPress={() => handleOnPress(item.href)} >
+            <TouchableOpacity style={{...styles.container, backgroundColor: setBGColor(item.href) }} key={index} onPress={() => handleOnPress(item.href)} >
               <View style={{ justifyContent: 'space-between', height: '100%' }}>
                 <Text style={{color: '#fff'}}>{item.title}</Text>
   
@@ -58,8 +81,6 @@ const Chapters = (props: Props): React.ReactElement => {
       </View>
     )
   }
-  
-  
 };
 
 const styles = StyleSheet.create({

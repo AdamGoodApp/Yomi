@@ -37,9 +37,9 @@ const Reader = ({ route, navigation }: any): React.ReactElement => {
     getPages();
   }, [page]);
 
-  const handleClose = () => {
+  const handleClose = (currentIndex: number) => {
     setVisible(false);
-    navigation.navigate('Info');
+    navigation.navigate('Info', {reader: currentIndex});
   }
 
   const handleOnClick = () => {

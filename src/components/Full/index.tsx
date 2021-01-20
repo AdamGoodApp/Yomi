@@ -11,10 +11,12 @@ import Chapters from '../Chapters';
 interface Props {
   manga: IManga;
   navigation: any;
+  route: any;
 }
 
 const Full = (props: Props): React.ReactElement => {
   const {
+    id,
     title: { english, romaji }, 
     coverImage: { extraLarge }, 
     bannerImage, 
@@ -129,7 +131,7 @@ const Full = (props: Props): React.ReactElement => {
         }}>
           <Text style={{ color: '#fff', marginBottom: 15, fontSize: 18, fontFamily: 'SFProTextRegular' }}>Chapters</Text>
 
-          <Chapters navigation={props.navigation} title={english || romaji}/>
+          <Chapters navigation={props.navigation} title={english || romaji} mangaID={id} route={props.route}/>
         </View>
       </View>
     </ScrollView>

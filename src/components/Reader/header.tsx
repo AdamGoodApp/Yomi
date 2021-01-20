@@ -15,7 +15,7 @@ const Header = (props: Props): React.ReactElement => {
   if (visible) {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={handleClose}>
+        <TouchableOpacity onPress={() => handleClose(currentIndex)}>
           <Feather name="chevron-left" size={38} color="white" />
         </TouchableOpacity>
   
