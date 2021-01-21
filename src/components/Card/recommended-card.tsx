@@ -11,7 +11,7 @@ const RecommendedCard = (props: Props): React.ReactElement => {
   const { coverImage: {large}, title, id } = mediaRecommendation;
 
   const onPress = async () => {
-    navigation.navigate('Info', { id: id });
+    navigation.navigate('Info', { id: id, prevPage: 'Full' });
   }
 
   return (

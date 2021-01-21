@@ -87,3 +87,13 @@ export const getMangaChapters = `
     }
   }
 `
+
+export const searchQuery = `
+  query ($perPage: Int, $term: String) {
+    Page (perPage: $perPage) {
+      media (type: MANGA sort: [POPULARITY_DESC], search: $term) {
+        ${mangaShort}
+      }
+    }
+  }
+`

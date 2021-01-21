@@ -38,8 +38,12 @@ const Full = (props: Props): React.ReactElement => {
 
   // Reset scrolls to start position on component render
   useEffect(() => {
-    scrollRef.current.scrollTo({x: 0, y: 0});
-    recommendedScrollRef.current.scrollToIndex({index: 0});
+    const { route: { params: { prevPage } }} = props;
+    
+    if(prevPage != "Reader") {
+      scrollRef.current.scrollTo({x: 0, y: 0});
+      recommendedScrollRef.current.scrollToIndex({index: 0});
+    }
   });
 
   return (
