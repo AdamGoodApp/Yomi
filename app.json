@@ -2,7 +2,7 @@
   "expo": {
     "name": "Yomi",
     "slug": "Yomi",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.adamgoodapp.yomi",
-      "buildNumber": "1.0.1"
+      "buildNumber": "2.0.0"
     },
     "android": {
       "package": "com.adamgoodapp.yomi",
