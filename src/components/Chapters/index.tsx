@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { manganeloChapters } from '../../lib/network/manga';
-import { bookmark, me } from '../../lib/network/user';
+import { update, me } from '../../lib/network/user';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
@@ -36,7 +36,7 @@ const Chapters = (props: Props): React.ReactElement => {
   }, [params.reader, title]);
 
   const handleOnPress = async (page: string) => {
-    bookmark({ bookmark: { mangaID: mangaID, chapterID: page }});
+    update({ bookmark: { mangaID: mangaID, chapterID: page }});
     navigation.navigate('Reader', { page: page });
   }
 

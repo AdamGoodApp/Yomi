@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
+import { update, me } from '../../lib/network/user';
 import Ratings from '../Ratings';
 import Stats from '../Stats';
 import Review from '../Card/review';
@@ -35,6 +36,7 @@ const Full = (props: Props): React.ReactElement => {
   const renderCard = ({ item }: any) => <RecommendedCard manga={item} navigation={props.navigation} />
   const scrollRef = useRef<any>();
   const recommendedScrollRef = useRef<any>();
+  const [ favourited, setFavourited ] = useState<boolean>(false);
 
   // Reset scrolls to start position on component render
   useEffect(() => {
@@ -45,6 +47,20 @@ const Full = (props: Props): React.ReactElement => {
       recommendedScrollRef.current.scrollToIndex({index: 0});
     }
   });
+
+  useEffect(() => {
+    const getMe = async () => {
+      const { favourites } = await me();
+      setFavourited(favourites.includes(id));
+    }
+
+    getMe();
+  }, [id]);
+
+  const addToFavourites = () => {
+    update({ favourites: id });
+    setFavourited(true);
+  }
 
   return (
     <ScrollView style={styles.container} indicatorStyle={'white'} ref={scrollRef}>
@@ -76,8 +92,12 @@ const Full = (props: Props): React.ReactElement => {
           marginBottom: 28 
         }}>
           <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
-          <TouchableOpacity>
-            <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-plus.png')} />
+          <TouchableOpacity onPress={addToFavourites}>
+            {
+              favourited ?  
+              <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-tick.png')} /> :
+              <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-plus.png')} />
+            }
           </TouchableOpacity>
         </View>
 

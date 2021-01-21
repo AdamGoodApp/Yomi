@@ -21,7 +21,7 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const bookmark = async (data: {}) => {
+export const update = async (data: {}) => {
   const user: any = await getKey('user');
   const parsed: any = JSON.parse(user);
 
