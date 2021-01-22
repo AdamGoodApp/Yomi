@@ -97,3 +97,14 @@ export const searchQuery = `
     }
   }
 `
+
+// Hack around since anilist graphql returns array with trailing comma which graphql does not permit for variables
+export const getFavourites = (ids: [Number]) => `
+  query ($perPage: Int) {
+    Page(perPage: $perPage) {
+      media(type: MANGA, id_in: [${ids}]) {
+        ${mangaShort}
+      }
+    }
+  }
+`

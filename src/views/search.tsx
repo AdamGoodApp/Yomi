@@ -21,8 +21,6 @@ const Search = ({ navigation }: any): React.ReactElement => {
 
     search();
   }, [searchTerm]);
-
-  console.log(searchTerm);
   
   return (
     <View style={styles.container}>
