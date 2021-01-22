@@ -8,12 +8,11 @@ import { secureStore } from './src/lib/secure-storage';
 import Navigation from './src/views/navigation';
 
 const App = () => {
-  // Store masterkey to be used for api requests
   useEffect(() => {
+    // Store masterkey to be used for api requests
     const storeKey = async () => {
       return await secureStore('master_key', '195FiTVCauQM2M9cHlIwhLzuHrkV6BsH');
-    }
-    
+    };
     storeKey();
   }, []);
 

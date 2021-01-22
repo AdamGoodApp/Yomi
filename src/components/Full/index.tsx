@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import ReadMore from '@fawazahmed/react-native-read-more';
-import { update, me } from '../../lib/network/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToLibrary, removeFromLibrary } from '../../store/actions/User';
 import Ratings from '../Ratings';
 import Stats from '../Stats';
 import Review from '../Card/review';
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const Full = (props: Props): React.ReactElement => {
+  const dispatch = useDispatch();
   const {
     id,
     title: { english, romaji }, 
@@ -36,7 +37,7 @@ const Full = (props: Props): React.ReactElement => {
   const renderCard = ({ item }: any) => <RecommendedCard manga={item} navigation={props.navigation} />
   const scrollRef = useRef<any>();
   const recommendedScrollRef = useRef<any>();
-  const [ favourited, setFavourited ] = useState<boolean>(false);
+  const { user: { library }} = useSelector((state: any) => state);
 
   // Reset scrolls to start position on component render
   useEffect(() => {
@@ -48,19 +49,13 @@ const Full = (props: Props): React.ReactElement => {
     }
   });
 
-  useEffect(() => {
-    const getMe = async () => {
-      const { favourites } = await me();
-      setFavourited(favourites.includes(id));
-    }
-
-    getMe();
-  }, [id]);
-
   const addToFavourites = () => {
-    update({ favourites: id });
-    setFavourited(true);
-  }
+    dispatch(addToLibrary({ library: [id] }));
+  };
+
+  const removeFromFavourites = () => {
+    dispatch(removeFromLibrary({ library: [id] }));
+  };
 
   return (
     <ScrollView style={styles.container} indicatorStyle={'white'} ref={scrollRef}>
@@ -70,17 +65,7 @@ const Full = (props: Props): React.ReactElement => {
         <View style={{ borderBottomColor: 'rgb(44,44,46)', borderBottomWidth: 0.5, paddingBottom: 10, marginBottom: 28}}>
           <Text style={{color: '#fff', fontFamily: 'SFProTextBold', fontSize: 32, marginBottom: 12}}>{english || romaji}</Text>
 
-          <ReadMore 
-            numberOfLines={5} 
-            style={styles.textStyle} 
-            seeMoreText="More" 
-            backgroundColor="#000"
-            seeMoreStyle={{color: '#fff', fontFamily: 'SFProTextBold'}}
-            seeLessStyle={{}}
-          >
-
-            <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>{ cleanedDesc }</Text>
-          </ReadMore>
+          <Text style={{color: '#fff', fontFamily: 'SFProTextRegular'}}>{ cleanedDesc }</Text>
         </View>
 
         <View style={{
@@ -92,13 +77,15 @@ const Full = (props: Props): React.ReactElement => {
           marginBottom: 28 
         }}>
           <Ratings score={meanScore} ratings={favourites} style={{marginBottom: 12}}/>
-          <TouchableOpacity onPress={addToFavourites}>
             {
-              favourited ?  
-              <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-tick.png')} /> :
-              <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-plus.png')} />
+              library.includes(id)?
+              <TouchableOpacity onPress={removeFromFavourites}>
+                <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-tick.png')} />
+              </TouchableOpacity> :
+              <TouchableOpacity onPress={addToFavourites}>
+                <Image style={{width: 37, height: 37}} source={require('../../../assets/text-badge-plus.png')} />
+              </TouchableOpacity>
             }
-          </TouchableOpacity>
         </View>
 
         <Stats genres={genres} date={startDate} chapters={chapters} staff={nodes}/>

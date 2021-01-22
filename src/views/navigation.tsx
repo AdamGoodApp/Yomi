@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector, useDispatch } from 'react-redux';
 import { setOpen } from '../store/actions/Settings';
 import BottomSheet from 'reanimated-bottom-sheet';
-import { setUser } from '../store/actions/User';
+import { setUser, addToLibrary } from '../store/actions/User';
 import { deleteKey } from '../lib/secure-storage';
+import { me } from '../lib/network/user';
 import Login from './login';
 import Home from './home';
 import Info from './info';
@@ -20,6 +21,14 @@ const Navigation = ({ navigation }: any): React.ReactElement => {
   const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
   const { user: { auth, account }, settings: { open } } = useSelector((state: any) => state);
+
+  useEffect(() => {
+    const storeLibrary = async () => {
+      const { favourites } = await me();
+      dispatch(addToLibrary({ library: favourites }));
+    }
+    storeLibrary();
+  }, [])
 
   useEffect(() => {
     open && sheetRef.current.snapTo(0);

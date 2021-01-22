@@ -1,2 +1,4 @@
 export const AUTH_EVENT = 'AUTH_EVENT';
 export const SETTINGS_EVENT = 'SETTINGS_EVENT';
+export const ADD_TO_LIBRARY = 'ADD_TO_LIBRARY';
+export const REMOVE_FROM_LIBRARY = 'REMOVE_FROM_LIBRARY';
