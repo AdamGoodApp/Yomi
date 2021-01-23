@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector, useDispatch } from 'react-redux';
 import { setOpen } from '../store/actions/Settings';
 import BottomSheet from 'reanimated-bottom-sheet';
-import { setUser, addToLibrary } from '../store/actions/User';
+import { setUser, addToLibraryAsync, addToBookmarksAsync } from '../store/actions/User';
 import { deleteKey } from '../lib/secure-storage';
 import { me } from '../lib/network/user';
 import Login from './login';
@@ -23,11 +23,12 @@ const Navigation = ({ navigation }: any): React.ReactElement => {
   const { user: { auth, account }, settings: { open } } = useSelector((state: any) => state);
 
   useEffect(() => {
-    const storeLibrary = async () => {
-      const { favourites } = await me();
-      dispatch(addToLibrary({ library: favourites }));
+    const storeData = async () => {
+      const { favourites, bookmarks } = await me();
+      dispatch(addToLibraryAsync({ library: favourites }));
+      dispatch(addToBookmarksAsync({ bookmarks: bookmarks }));
     }
-    storeLibrary();
+    storeData();
   }, [])
 
   useEffect(() => {

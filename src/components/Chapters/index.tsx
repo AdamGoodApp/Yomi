@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToBookmarksAsync } from '../../store/actions/User';
 import { manganeloChapters } from '../../lib/network/manga';
-import { update, me } from '../../lib/network/user';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
@@ -12,37 +13,28 @@ interface Props {
 }
 
 const Chapters = (props: Props): React.ReactElement => {
-  const { navigation, route: { params }, title, mangaID } = props;
+  const dispatch = useDispatch();
+  const { navigation, title, mangaID } = props;
+  const { user: { bookmarks }} = useSelector((state: any) => state);
   const [chapters, setChapters] = useState([]);
-  const [bookmarkStore, setBookmark] = useState<any>(null);
 
   useEffect(() => {
     const getChapters = async () => {
       const { chapters } = await manganeloChapters(title);
-
       setChapters(chapters);
     };
     
     getChapters();
   }, [title]);
 
-  useEffect(() => {
-    const getBookmark = async () => {
-      const { bookmark } = await me();
-      setBookmark(bookmark);
-    };
-    
-    getBookmark();
-  }, [params.reader, title]);
-
   const handleOnPress = async (page: string) => {
-    update({ bookmark: { mangaID: mangaID, chapterID: page }});
+    dispatch(addToBookmarksAsync({ bookmarks: [page]}));
     navigation.navigate('Reader', { page: page });
   }
 
   const setBGColor = (chapter: string) => {
-    if(chapter && bookmarkStore) {
-      return bookmarkStore.chapterID === chapter ? 'rgb(58,58,60)' : '#1c1c1e';
+    if(chapter && bookmarks) {
+      return bookmarks.includes(chapter) ? 'rgb(58,58,60)' : '#1c1c1e';
     } else {
       return '#1c1c1e';
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToLibrary, removeFromLibrary } from '../../store/actions/User';
+import { addToLibraryAsync, removeFromLibraryAsync } from '../../store/actions/User';
 import Ratings from '../Ratings';
 import Stats from '../Stats';
 import Review from '../Card/review';
@@ -50,11 +50,11 @@ const Full = (props: Props): React.ReactElement => {
   });
 
   const addToFavourites = () => {
-    dispatch(addToLibrary({ library: [id] }));
+    dispatch(addToLibraryAsync({ library: [id] }));
   };
 
   const removeFromFavourites = () => {
-    dispatch(removeFromLibrary({ library: [id] }));
+    dispatch(removeFromLibraryAsync({ library: [id] }));
   };
 
   return (
